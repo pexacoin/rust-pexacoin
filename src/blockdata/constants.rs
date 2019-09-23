@@ -54,7 +54,7 @@ pub fn max_target(_: Network) -> Uint256 {
 /// since keeping everything below this value should prevent overflows
 /// if you are doing anything remotely sane with monetary values).
 pub fn max_money(_: Network) -> u64 {
-    21_000_000 * COIN_VALUE
+    17_122_989 * COIN_VALUE
 }
 
 /// Constructs and returns the coinbase (and only) transaction of the Bitcoin genesis block
@@ -70,7 +70,7 @@ fn bitcoin_genesis_tx() -> Transaction {
     // Inputs
     let in_script = script::Builder::new().push_scriptint(486604799)
                                           .push_scriptint(4)
-                                          .push_slice(b"The Times 03/Jan/2009 Chancellor on brink of second bailout for banks")
+                                          .push_slice(b"FOX News 6/29/2019 Trump heads to DMZ possibility of meeting Kim crossing into North Korea")
                                           .into_script();
     ret.input.push(TxIn {
         previous_output: OutPoint::null(),
@@ -103,9 +103,9 @@ pub fn genesis_block(network: Network) -> Block {
                     version: 1,
                     prev_blockhash: Default::default(),
                     merkle_root: txdata[0].txid(),
-                    time: 1231006505,
-                    bits: 0x1d00ffff,
-                    nonce: 2083236893
+                    time: 1562369695,
+                    bits: 0x1e00ffff,
+                    nonce: 33393258
                 },
                 txdata: txdata
             }
@@ -117,9 +117,9 @@ pub fn genesis_block(network: Network) -> Block {
                     version: 1,
                     prev_blockhash: Default::default(),
                     merkle_root: txdata[0].txid(),
-                    time: 1296688602,
-                    bits: 0x1d00ffff,
-                    nonce: 414098458
+                    time: 1524179366,
+                    bits: 0x1e00ffff,
+                    nonce: 8889826
                 },
                 txdata: txdata
             }

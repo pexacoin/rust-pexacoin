@@ -34,7 +34,7 @@
 //! let network = Network::Bitcoin;
 //! let bytes = serialize(&network.magic());
 //!
-//! assert_eq!(&bytes[..], &[0xF9, 0xBE, 0xB4, 0xD9]);
+//! assert_eq!(&bytes[..], &[0x50, 0x45, 0x58, 0x41]);
 //! ```
 
 /// Version of the protocol as appearing in network message headers
@@ -65,13 +65,13 @@ impl Network {
     /// ```rust
     /// use bitcoin::network::constants::Network;
     ///
-    /// assert_eq!(Some(Network::Bitcoin), Network::from_magic(0xD9B4BEF9));
+    /// assert_eq!(Some(Network::Bitcoin), Network::from_magic(0x41584550));
     /// assert_eq!(None, Network::from_magic(0xFFFFFFFF));
     /// ```
     pub fn from_magic(magic: u32) -> Option<Network> {
         // Note: any new entries here must be added to `magic` below
         match magic {
-            0xD9B4BEF9 => Some(Network::Bitcoin),
+            0x41584550 => Some(Network::Bitcoin),
             0x0709110B => Some(Network::Testnet),
             0xDAB5BFFA => Some(Network::Regtest),
             _ => None
@@ -87,12 +87,12 @@ impl Network {
     /// use bitcoin::network::constants::Network;
     ///
     /// let network = Network::Bitcoin;
-    /// assert_eq!(network.magic(), 0xD9B4BEF9);
+    /// assert_eq!(network.magic(), 0x41584550);
     /// ```
     pub fn magic(&self) -> u32 {
         // Note: any new entries here must be added to `from_magic` above
         match *self {
-            Network::Bitcoin => 0xD9B4BEF9,
+            Network::Bitcoin => 0x41584550,
             Network::Testnet => 0x0709110B,
             Network::Regtest => 0xDAB5BFFA,
         }
@@ -108,7 +108,7 @@ mod tests {
     fn serialize_test() {
         assert_eq!(
             serialize(&Network::Bitcoin.magic()),
-            &[0xf9, 0xbe, 0xb4, 0xd9]
+            &[0x50, 0x45, 0x58, 0x41]
         );
         assert_eq!(
             serialize(&Network::Testnet.magic()),
@@ -120,7 +120,7 @@ mod tests {
         );
 
         assert_eq!(
-            deserialize(&[0xf9, 0xbe, 0xb4, 0xd9]).ok(),
+            deserialize(&[0x50, 0x45, 0x58, 0x41]).ok(),
             Some(Network::Bitcoin.magic())
         );
         assert_eq!(
